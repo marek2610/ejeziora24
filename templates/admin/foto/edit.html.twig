@@ -1,0 +1,46 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Edycja zdjęcia dla jeziora {{ jezioro.nazwa}}{% endblock %}
+
+{% block page_title %}
+    Edycja zdjęcia dla jeziora
+    <span class="text-primary">
+        {{ jezioro.nazwa}} 
+    </span>
+{% endblock %}
+
+{% block body %}
+
+<div class="table-responsive">
+    {{ form_start(form) }}
+	<form action="">
+		<table class="table table-sm table-hprzeslij mi na @ bo jak idzie teamsem to mi muli
+        ">
+			<thead>
+                <tr>
+                    <th scope="row">Zdjęcie</th>
+                    <th scope="row">Zdjęcie</th>
+                </tr>
+			</thead>
+            <tbody>
+                <tr>
+                    <td>
+                    <img style="height: 50%; width: 50%; display: block;" src="{{ asset('uploads/jeziora/' ~ foto.brochureFilename) }}" alt="{{ foto.nazwa }}">
+                    </td>{{ form_start(form) }}
+
+	            
+                    <td>{{ form_widget(form.brochure, {'attr': {'class': 'form-control-file', 'id': 'plik'}}) }}</td>
+                </tr>
+                <tr>
+                </tr>
+            </tbody>
+		</table>
+                {{ form_widget(form) }}
+		<button class="btn">{{ button_label|default('Modyfikuj') }}</button>
+	</form>
+	{{ form_end(form) }}
+</div>
+
+    <a href="{{ path('admin.foto.index') }}">powrót do listy zdjęć</a>
+
+{% endblock %}

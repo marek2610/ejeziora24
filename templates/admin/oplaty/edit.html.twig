@@ -1,0 +1,28 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Edycja opłaty{% endblock %}
+
+{% block page_title %}Formularz edycji karty wędkarskiej<h1><h3 class="text-primary">{{ oplata.rodzaj }} dla jeziora {{ oplata.jezioro.nazwa }}{% endblock %}
+
+{% block body %}
+
+    {{ include('admin/oplaty/_form.html.twig', {'button_label': 'Edytuj'}) }}
+
+    <hr>
+
+    {# <div>
+        {{ include('admin/oplaty/_delete_form.html.twig') }}
+    </div> #}
+
+    <hr>
+
+    <a class="pull-left" href="{{ path('admin.oplaty.index') }}">
+        <button class="btn btn-primary">
+            Powrót
+        </button>
+    </a>
+
+    <div class="clearfix"></div>
+
+
+{% endblock %}

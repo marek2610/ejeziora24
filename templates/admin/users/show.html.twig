@@ -1,0 +1,82 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block page_title %}
+    Info użytkownika
+    <span class="text-primary">
+        {{ user.imie }}
+        {{ user.nazwisko }}
+        {{ user.nazwa }}
+    </span>
+{% endblock %}
+
+{% block body %}
+
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr> 
+                <th>IsVerified</th>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Imie</th>
+                <td>{{ user.imie }}</td>
+            </tr>
+            <tr>
+                <th>Nazwisko</th>
+                <td>{{ user.nazwisko }}</td>
+            </tr>
+            <tr>
+                <th>Nazwa</th>
+                <td>{{ user.nazwa }}</td>
+            </tr>
+            <tr>
+                <th>Telefon</th>
+                <td>{{ user.telefon }}</td>
+            </tr>
+            <tr>
+                <th>Nr konta</th>
+                <td>{{ user.nrKonta }}</td>
+            </tr>
+            <tr>
+                <th>Bank</th>
+                <td>{{ user.bank }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<nav class="navbar navbar-expand-sm">
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('admin.users.index') }}">powrót do listy użytkowników</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('admin.user.edit', {'id': user.id}) }}">edytuj</a>
+		</li>
+        <li class="nav-item">
+            {{ include('admin/users/_delete_form.html.twig') }}
+        </li>
+
+	</ul>
+</nav>
+
+{% endblock %}

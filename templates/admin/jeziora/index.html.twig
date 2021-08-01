@@ -1,0 +1,71 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Jeziora{% endblock %}
+
+{% block page_title %}Jeziora{% endblock %}
+
+{% block body %}
+   
+<div class="table-responsive">
+    <table class="table table-striped table-sm table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nazwa</th>
+                <th>Powierzchnia</th>
+                <th>Pomosty</th>
+                <th>Łódź</th>
+                <th>Kusza</th>
+                <th>Fish</th>
+                <th>Utworzono</th>
+                <th>Aktywny</th>
+                <th>Modyfikacja</th>
+                <th>Miejscowość</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jeziora in jeziora %}
+            <tr
+            {% if jeziora.aktywny == false %}
+            class="table-secondary">
+            {% else %}
+            >
+            {% endif %}
+
+                <td>{{ loop.index }}</td>
+                <td>{{ jeziora.nazwa }}</td>
+                <td>{{ jeziora.powierzchnia }}</td>
+                <td>{{ jeziora.pomosty ? 'Yes' : 'No' }}</td>
+                <td>{{ jeziora.lodz ? 'Yes' : 'No' }}</td>
+                <td>{{ jeziora.kusza ? 'Yes' : 'No' }}</td>
+                <td>{{ jeziora.fish }}</td>
+                <td>{{ jeziora.utworzono ? jeziora.utworzono|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ jeziora.aktywny ? 'Yes' : 'No' }}</td>
+                <td>{{ jeziora.modyfikacja ? jeziora.modyfikacja|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ jeziora.miejscowosc }}</td>
+                <td>
+                    <a href="{{ path('admin.jeziora.show', {'slug': jeziora.slug}) }}">show</a>
+                    <a href="{{ path('admin.jeziora.edit', {'slug': jeziora.slug}) }}">edit</a>
+                    <a href="{{ url('admin.jeziora.delete', {'slug': jeziora.slug}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<nav class="navbar navbar-expand-sm">
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+			<a class="nav-link" href="{{ url('admin.jeziora.new')}}">Nowe jezioro</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{{ url('admin_admin') }}">Panel administracyjny</a>
+		</li>
+	</ul>
+</nav>
+{% endblock %}

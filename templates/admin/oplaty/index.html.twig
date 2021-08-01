@@ -1,0 +1,98 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Karty wędkarskie{% endblock %}
+
+{% block page_title %}Karty wędkarskie{% endblock %}
+
+{% block body %}
+
+<div class="table-responsive">
+	<table class="table table-striped table-sm table-hover">
+		<thead>
+			<tr class="">
+				<th>#</th>
+				<th>Użytkownik</th>
+				<th>Jezioro</th>
+				<th>Rodzaj</th>
+				<th >Cena</th>
+				<th>Akcje</th>
+			</tr>
+		</thead>
+		{% for oplata in oplaty %}
+			<tr 
+				{% if oplata.jezioro.aktywny == false %}
+					class="table-dark">
+				{% else %}
+					>
+				{% endif %}
+				<td>{{ loop.index }}</td>
+				<td>{{ oplata.user.imie }} {{ oplata.user.nazwisko }} {{ oplata.user.nazwa }}</td>
+				<td>{{ oplata.jezioro }}</td>
+				<td>{{ oplata.rodzaj }}</td>
+				<td class>{{ oplata.cena }} PLN</td>
+				<td>
+					<a href="{{ path('admin.karty.show', {'id': oplata.id}) }}">show</a>
+					<a href="{{ path('admin.karty.edit', {'id': oplata.id}) }}">edit</a>
+					<a href="{{ path('admin.karty.delete', {'id': oplata.id}) }}">delete</a>
+				</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="4">brak danych</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+	<hr>
+{% if jeziora_bez_oplat == true %}
+	<table class="table table-striped table-sm table-hover">
+		<tr class="">
+			<th>#</th>
+			<th>Jezioro</th>
+			<th>User</th>
+			<th>User Info</th>
+			<th>Rodzaj</th>
+			<th>Cena</th>
+			<th>Info</th>
+		</tr>
+		{% for jbo in jeziora_bez_oplat %}
+		<tr
+			{% if jbo.aktywny == false %}
+				class="table-secondary">
+			{% else %}
+				>
+			{% endif %}
+			<td>{{ loop.index }}</td>
+			<td>{{ jbo.nazwa }}</td>
+			<td>{{ jbo.users }}</td>
+			<td>{{ jbo.users.imie }} {{ jbo.users.nazwisko }} {{ jbo.users.nazwa }}</td>
+			<td colspan="3" class="text-center">nie zdefiniowano opłat za połowy</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% else %}
+		<div class="alert alert-dismissible alert-primary">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Informacja!</strong>
+			Wszystkie jeziora posaidają zdefioniowane opłaty wędkarskie.
+		</div>
+	{% endif %}
+
+<nav class="navbar navbar-expand-sm">
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('admin.karty.new') }}">Nowa opłata</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{{ url('admin_admin') }}">Panel administracyjny</a>
+		</li>
+	</ul>
+</nav>
+
+
+	{# <div class="navigation">
+		Nawigacja
+	</div> #}
+</div>
+
+{% endblock %}

@@ -1,0 +1,219 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeziora{% endblock %}
+
+{% block body %}
+
+
+<div class="jumbotron">
+    <div class="container">
+    
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                <strong>Gratulacje!!!</strong>
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                <strong>Uwaga!!!</strong>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {# {{ dump() }} #}
+        <div class="row">
+        <div class="col-md-7">
+            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active" data-interval="10000">
+                        <img style="height: 100%; width: 100%; display: block;" src="{{ asset('uploads/jeziora/' ~ jeziora.brochureFilename) }}" alt="{{ jeziora.nazwa }}">
+                    </div>
+                    <div class="carousel-item" data-interval="2000">
+                        <img style="height: 100%; width: 100%; display: block;" src="{{ asset('uploads/jeziora/' ~ jeziora.brochureFilename) }}" alt="{{ jeziora.nazwa }}">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Poprzedni</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Następny</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <h1 class="text-primary">{{ jeziora.nazwa }}</h1>
+            <h3 class="text-muted">{{ jeziora.miejscowosc }}</h3>
+            <h3 class="text-secondary">woj. {{ jeziora.region }}</h3>
+            <h3 class="text-primary">{{ jeziora.powierzchnia }} ha</h3>
+            <p> Użytkownik rybacki: 
+                {% if jeziora.users.imie is empty or jeziora.users.nazwisko is empty and jeziora.users.nazwa %}
+                    Użytkownik nie podał pełnych danych
+                {% else %}
+                    <span class="text-primary">
+                        {{ (jeziora.users.imie) }}
+                        {{ (jeziora.users.nazwisko) }} <br>
+                        {{ (jeziora.users.nazwa) }}
+                    </span>
+                {% endif %}
+            </p>
+
+            <small>dodano: {{ jeziora.utworzono ? jeziora.utworzono|date('Y-m-d') : '' }}</small>
+
+            <div class="row">
+                <div class="col mt-2 mb-3">
+                    <button type="submit" class="btn btn-primary" id="contactButton" >Kontakt do użytkownika rybackiego</button>
+                </div>
+            </div>
+
+            <div id="contactForm" style="display:none">
+                {{ form_start(form)}}
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        {{ form_widget(form.imie, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        {{ form_widget(form.nazwisko, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        {{ form_widget(form.telefon, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col">
+                        {{ form_widget(form.wiadomosc, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col">
+                        {{ form_widget(form.captcha, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                
+
+                <button type="submit" class="btn btn-primary">Wyślij</button>
+                {{ form_rest(form)}}
+                {{ form_end(form)}}
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+</div>
+<div class="container mt-4">
+    
+    <p class="text-justify">{{ jeziora.opis |striptags}}</p>
+    <div class="row">
+        <div class="col-md-7">
+            <h3 class="text-secondary">Charakterystyka</h3>
+            <table class="table table-striped">
+                <tr>
+                    <td>Pomosty</td>
+                    <td>{{ jeziora.pomosty ? 'Tak' : 'Nie' }}</td>
+                </tr>
+                <tr>
+                    <td>Połowy łodzią</td>
+                    <td>{{ jeziora.lodz ? 'Tak' : 'Nie' }}</td>
+                </tr>
+                <tr>
+                    <td>Połowy kuszą</td>
+                    <td>{{ jeziora.kusza ? 'Tak' : 'Nie' }}</td>
+                </tr>
+                <tr>
+                    <td>Ryby</td>
+                    <td>{{ jeziora.fish }}</td>
+                </tr>
+            </table>
+            <h3 class="text-secondary">Dodatkowe informacje</h3>
+            <table class="table table-striped">
+                <tr>
+                    <td>Telefon</td>
+                    <td>{{ (jeziora.users.telefon) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ user.www ? "więcej informacji: " ~ user.www : 'użytkownik nie podał strony www'}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <h3 class="text-secondary">Opłaty</h3>
+            
+            <table class="table table-striped">
+                {% for oplata in oplatyJezioroID %}
+                    <tr>
+                        <td>{{ oplata.rodzaj }}</td>
+                        <td class="text-right">{{ oplata.cena | number_format(2, ',', ' ') }}
+                            PLN</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="2">Użytkownik rybacki nie zdefiniował żadnej opłaty dla tego jeziora</td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <h3 class="text-secondary">Dane do przelewu</h3>
+            {# {{ dump(user) }} #}
+            <table class="table table-striped">
+                <tr>
+                    <td>Nr konta</td> 
+                    <td>{{ user.nrkonta ? user.nrkonta : 'Brak'}}</td>
+                </tr>
+                <tr>
+                    <td>Nazwa banku</td>
+                    <td>{{ user.bank ? user.bank : 'Brak'}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <hr>
+
+        <a class="pull-left" href="{{ path('jeziora_index') }}">
+            <button class="btn btn-primary">
+                Powrót
+            </button>
+        </a>
+
+    {# <a href="{{ path('jeziora_edit', {'slug': jeziora.slug}) }}">edytuj</a> #}
+    {# {{ include('jeziora/_delete_form.html.twig') }} #}
+
+    <div class="clearfix"></div>
+</div>
+    
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script>
+    // pokazywanie formularza kontaktu do użytkownika rybackiego
+	$(function () {
+        $('#contactButton').on('click', function () {
+            $('#contactForm').toggle();
+        });
+    });
+
+</script>
+
+{% endblock %}
+
+
+
+

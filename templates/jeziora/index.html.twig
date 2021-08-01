@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ogłoszenia{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            <strong>Gratulacje!!!</strong>{{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            <strong>Uwaga!!!</strong>{{ message }}
+        </div>
+    {% endfor %}
+
+<!-- Jumbotron opcja szukaj -->
+<div class="jumbotron text-center">
+	<div class="container">
+		{{ form_start(form) }}
+		<div class="form-row">
+			<div class="col"></div>
+			<div class="col">
+				{{ form_row(form.nazwaSearch) }}
+			</div>
+			<div class="col">
+				{{ form_row(form.powierzchniaSearch) }}
+			</div>
+			<div class="col">
+				{{ form_row(form.miejscowoscSearch) }}
+			</div>
+			<div class="col"></div>
+		</div>
+		<hr>
+		<div class="for-row mt-2">
+			<div class="col">
+				<div class="col">
+					{{ form_row(form.regionSearch) }}
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="form-row mt-2">
+			<div class="col-sm-2">
+				{{ form_label(form.pomostySearch) }}
+			</div>
+			<div class="col-sm-2">
+				{{ form_widget(form.pomostySearch) }}
+			</div>
+			<div class="col-sm-2">
+				{{ form_label(form.lodzSearch) }}
+			</div>
+			<div class="col-sm-2">
+				{{ form_widget(form.lodzSearch) }}
+			</div>
+			<div class="col-sm-2">
+				{{ form_label(form.kuszaSearch) }}
+			</div>
+			<div class="col-sm-2">
+				{{ form_widget(form.kuszaSearch) }}
+			</div>
+		</div>
+
+		<hr>
+		<button class="btn btn-primary btn-block" type="submit">Szukaj</button>
+		{{ form_rest(form) }}
+		{{ form_end(form) }}
+	</div>
+</div>
+<!-- END Jumbotron opcja szukaj -->
+
+
+<div class="container text-center">
+	{# <h1>Jeziora index: {{ jeziora.getTotalItemCount }} ogłoszeń</h1> #}
+	<div class="row flex">
+		{% for j in jeziora %}
+			<div class="col-4 text-center mb-4">
+				<div class="card card text-white bg-primary">
+					<a href="{{ url('jeziora_show', {slug: j.slug}) }}" class="list-group-item list-group-item-action flex-column align-items-start active">
+						<div class="text-center">
+							<h3>{{ j.nazwa }}</h3>
+						</div>
+					</a>
+					<div class="card-body p-2">
+						<h5>
+						msc. {{ j.miejscowosc }} <br>
+						</h5>
+						{{ j.powierzchnia |number_format(2, ',', ' ') }} ha<br>
+						{{ j.region }}
+					</div>
+					<img style="height: 200px; width: 100%; display: block;" src="{{ asset('uploads/jeziora/' ~ j.brochureFilename) }}" alt="{{ j.nazwa }}">
+					<div class="card-body">
+						<p class="card-text">{{ j.opis | striptags | u.truncate(35, '...', true ) }}</p>
+					</div>
+                    <ul class="list-group list-group-flush">
+					    <li class="list-group-item text-muted"></li>
+				    </ul>
+                    <div class="card-body">
+                        Data dodania: {{ j.utworzono | date ('d/m/Y') }}
+				    </div>
+				</div>
+			</div>
+		{% else %}
+				<div class="col-12 alert alert-dismissible alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Uwaga!</strong>
+				Brak jezior o zadanych kryteriach, proszę spróbować jeszcze raz.
+			</div>
+
+
+			
+		{% endfor %}
+	</div>
+	<div class="navigation">
+    {{ knp_pagination_render(jeziora) }}
+</div>
+	{# <a href="{{ path('jeziora_new') }}">Create new</a> #}
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil użytkownika{% endblock %}
+
+{% block body %}
+
+  {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+      <strong>Gratulacje!!!</strong>
+      {{ message }}
+    </div>
+  {% endfor %}
+  {% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+      <strong>Uwaga!!!</strong>
+      {{ message }}
+    </div>
+  {% endfor %}
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Profil użytkownika</h1>
+	</div>
+</div>
+	
+<div class="container">
+	<table class="mt-4 table table-hover">
+		<tr>
+			<th scope="row">Adres email</th>
+			<td>{{ app.user.email }}</td>
+		</tr>
+		<tr>
+			<th scope="row">Imię</th>
+			<td>{{ app.user.imie }}</td>
+		</tr>
+		<tr>
+			<th scope="row">Nazwisko</th>
+			<td>{{ app.user.nazwisko }}</td>
+		</tr>
+		<tr>
+			<th scope="row">Nazwa gospodarstwa</th>
+			<td>{{ app.user.nazwa }}</td>
+		</tr>
+		<tr>
+			<th scope="row">Telefon</th>
+			<td>{{ app.user.telefon }}</td>
+		</tr>
+		<tr>
+			<th scope="row">Nr konta bankowego</th>
+			<td>{{ app.user.nrkonta }}</td>
+		</tr>
+		<tr>
+			<th scope="row">Bank</th>
+			<td>{{ app.user.bank }}</td>
+		</tr>
+		<tr>
+			<th scope="row">www</th>
+			<td>{{ app.user.www }}</td>
+		</tr>
+
+
+
+	</table>
+
+  <div class="mt-4 mb-4 text-center">
+    <a href="{{ url('users.edit')}}">
+      <button type="button" class="btn btn-primary">Edycja profilu</button>
+    </a>
+    <a href="{{ url('users.password') }}">
+      <button type="button" class="btn btn-primary">Zmiana hasła</button>
+    </a>
+  </div>
+
+</div>
+
+
+
+{% endblock %}

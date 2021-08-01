@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edycja jeziora{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Formularz edycji jeziora: {{ jeziora.nazwa }}</h1>
+    </div>
+</div>
+
+<div class="container">
+    {# <legend>Formularz edycji jeziora: {{ jeziora.nazwa }}</legend> #}
+
+    {{ include('jeziora/_form.html.twig', {'button_label': 'Edytuj'}) }}
+
+    <hr>
+
+    <div>
+        {{ include('jeziora/_delete_form.html.twig') }}
+    </div>
+
+    <hr>
+
+    <a class="pull-left" href="{{ path('jeziora_index') }}">
+        <button class="btn btn-primary">
+            Powrót
+        </button>
+    </a>
+
+    <div class="clearfix"></div>
+
+</div>
+{% endblock %}

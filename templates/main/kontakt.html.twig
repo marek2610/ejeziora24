@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kontakt{% endblock %}
+
+{% block body %}
+<div class="container">
+
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Formularz kontaktowy</h1>
+		<p class="primary">Jeżeli masz jakieś sugestie, propozycje lub po prostu chcesz nawiązać współpracę z serwisem <strong>www.e-jeziora24.pl</strong>  - napisz. <br> Najszybciej jak to możliwe postaramy się odpowiedzieć. Na pewno pomożemy.</p>
+	</div>
+
+{{ form_start(kontaktForm)}}
+<form>
+  <fieldset>
+		<div class="row">
+			<div class="form-group col-6">
+				<label for="">
+					{{ form_label(kontaktForm.imie) }}
+				</label>
+				{{ form_widget(kontaktForm.imie, {'attr': {'class': 'form-control'}}) }}
+				<small>Należy podać imię</small>
+			</div>
+			<div class="form-group col-6">
+				<label for="">
+					{{ form_label(kontaktForm.nazwisko) }}
+				</label>
+				{{ form_widget(kontaktForm.nazwisko, {'attr': {'class': 'form-control'}}) }}
+				<small>Należy podać nazwisko</small>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-6">
+				<label for="">
+					{{ form_label(kontaktForm.email) }}
+				</label>
+				{{ form_widget(kontaktForm.email, {'attr': {'class': 'form-control'}}) }}
+				<small>przykładowy@adres.email</small>
+			</div>
+			<div class="form-group col-6">
+				<label for="">
+					{{ form_label(kontaktForm.telefon) }}
+				</label>
+				{{ form_widget(kontaktForm.telefon, {'attr': {'class': 'form-control'}}) }}
+				<small>tel. 123 123 123</small>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col">
+				<label for="">
+					{{ form_label(kontaktForm.wiadomosc) }}
+				</label>
+				{{ form_widget(kontaktForm.wiadomosc, {'attr': {'class': 'form-control'}}) }}
+				<small>Krótka wiadomość. Przedstaw ją możliwie najprościej jak możesz.</small>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col">
+
+				{{ form_widget(kontaktForm.captcha, {'attr': {'class': 'form-control'}}) }}
+
+			</div>
+		</div>
+
+		{{ form_rest(kontaktForm) }}
+    <button type="submit" class="btn btn-primary">Wyślij</button>
+  </fieldset>
+</form>
+{{ form_end(kontaktForm)}}
+
+
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{# 	
+	<script type="text/javascript">
+  $(function() {
+    $('.<a href="https://www.jqueryscript.net/time-clock/">date</a>').mask('99/99/9999');
+    $('.time').mask('99:99:99');
+    $('.date_time').mask('99/99/9999 99:99:99');
+    $('.cep').mask('99999-999');
+    $('.phone').mask('9999-9999');
+    $('.phone_with_ddd').mask('(99) 9999-9999');
+    $('.phone_us').mask('(999) 999-9999');
+    $('.mixed').mask('AAA 000-S0S');
+
+    $('.cep_with_callback').mask('00000-000', {onComplete: function(cep) {
+        console.log('Mask is done!:', cep);
+      },
+       onKeyPress: function(cep, event, currentField, options){
+        console.log('An key was pressed!:', cep, ' event: ', event, 'currentField: ', currentField.attr('class'), ' options: ', options);
+      }
+    });
+
+    $('.crazy_cep').mask('00000-000', {onKeyPress: function(cep){
+      var masks = ['00000-000', '0-00-00-00'];
+        mask = (cep.length>7) ? masks[1] : masks[0];
+      $('.crazy_cep').mask(mask, this);
+    }});
+
+    $('.cpf').mask('999.999.999-99', {reverse: true});
+    $('.money').mask('000.000.000.000.000,00', {reverse: true});
+
+    var SaoPauloCelphoneMask = function(phone, e, currentField, options){
+      return phone.match(/^(\(?11\)? ?9(5[0-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9])[0-9]{1})/g) ? '(00) 00000-0000' : '(00) 0000-0000';
+    };
+
+    $(".sp_celphones").mask(SaoPauloCelphoneMask, { onKeyPress: function(phone, e, currentField, options){
+      $(currentField).mask(SaoPauloCelphoneMask(phone), options);
+    }});
+
+  }); #}
+  </script>
+
+
+{% endblock %}

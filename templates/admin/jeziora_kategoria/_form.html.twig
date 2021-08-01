@@ -1,0 +1,24 @@
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+ 
+<div>
+	{{ form_start(form) }}
+	<form action="">
+        <table class="mt-4 table table-striped table-sm table-hove">
+            <tr>
+                <th scope="row">Kategoria</th>
+                <td>{{ form_widget(form.kategoria, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Opis</th>
+                <td>{{ form_widget(form.opis, {'attr': {'class': 'form-control'}}) }}</td>
+            </tr>
+
+        </table>
+		{{ form_widget(form) }}
+		<button class="btn">{{ button_label|default('Zapisz') }}</button>
+	</form>
+	{{ form_end(form) }}
+</div>

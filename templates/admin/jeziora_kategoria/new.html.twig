@@ -1,0 +1,11 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Dodawanie nowej kategorii obiektu{% endblock %}
+
+{% block page_title %}Dodawanie nowej kategorii obiektu{% endblock %}
+
+{% block body %}
+    {{ include('admin/jeziora_kategoria/_form.html.twig') }}
+
+    <a href="{{ path('jeziora_kategoria_index') }}">Powrót</a>
+{% endblock %}

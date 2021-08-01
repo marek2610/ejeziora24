@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Info{% endblock %}
+
+{% block body %}
+<div class="container">
+
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Informacja na temat serwisu www.e-jeziora24.pl</h1>
+		{# <p class="primary">Cennik ogłoszeń został stworzony z myślą o każdym użytkowniku rybackim, zarówno o tym mniejszym jaki tym bardziej wymagającym.</p> #}
+	</div>
+
+	<div class="card-deck mb-3 text-center ">
+		<div class="card mb-6 box-shadow">
+			<div class="card-header">
+				<h4 class="my-0 font-weight-normal">Dla rybaków</h4>
+			</div>
+			<div class="card-body">
+				{# <h1 class="card-title pricing-card-title">100 zł
+					<small class="text-muted">/ rok</small>
+				</h1> #}
+				<ul class="list-unstyled mt-3 mb-4 text-justify">
+					<p>Serwis <strong>www.e-jeziora24.pl</strong> dedykowany jest użytkownikom rybackim, posiadaczom stawów rybnych, jak i ośrodków wpuść i złów, dających możliwość, na swoich obiektach, amatorskiego połowu ryb.</p>
+					<p>
+					W ramach ogłoszenia dodać można takie informacje jak wielkości jeziora, sposób dojazdu oraz stawki jaki sortyment zarybienia.
+					</p>
+				</ul>
+			</div>
+		</div>
+
+		<div class="card mb-6 box-shadow">
+			<div class="card-header">
+				<h4 class="my-0 font-weight-normal">Dla wędkarzy</h4>
+			</div>
+			<div class="card-body">
+				{# <h1 class="card-title pricing-card-title">200 zł
+					<small class="text-muted">/ rok</small>
+				</h1> #}
+				<ul class="list-unstyled mt-3 mb-4 text-justify">
+					<p>
+					Przeznaczeniem aplikacji <strong>www.e-jeziora24.pl</strong> jest również informowanie wędkarzy o możliwości amatorskiego połowu ryb na danym jeziorze, stawach lub obwodzie rybackim.</p> 
+					<p>
+					W serwisie znaleźć będzie można znaleźć takie informacje jak położenie, dojazd, zarybienie, rodzaje połówów (łódź, kusza). 
+					</p>
+					<p>
+					Dodatkowo dostępne będą informacje na temat kart wędkarskich wraz z miejscem ich zakupu. 
+					<p>
+					Celowo zrezygnowaliśmy z wdrożenia elektronicznej formy kupna ze względu na doliczną prowizję operatorów płatności elektronicznych od wielkości tranzakcji, która finalnie przerzucana jest na odbiorcę końcowego czyli wędkarza.</p>
+					</p>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<div >
+{{ form_start(form) }}
+    <form action="">
+    <table class="mt-4 table table-striped table-sm table-hove">
+        <tr>
+            <th scope="row">Adres email</th>
+            <td>{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Weryfikacja</th>
+            <td>{{ form_widget(form.isVerified, {'attr': {'class': 'form-checkbox-widget'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Imię</th>
+            <td>{{ form_widget(form.imie, {'attr': {'class': 'form-control'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Nazwisko</th>
+            <td>{{ form_widget(form.nazwisko, {'attr': {'class': 'form-control'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Nazwa</th>
+            <td>{{ form_widget(form.nazwa, {'attr': {'class': 'form-control'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Telefon</th>
+            <td>{{ form_widget(form.telefon, {'attr': {'class': 'form-control'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Nr konta bankowego</th>
+            <td>{{ form_widget(form.nr_konta, {'attr': {'class': 'form-control'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Bank</th>
+            <td>{{ form_widget(form.bank, {'attr': {'class': 'form-control'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">www</th>
+            <td>{{ form_widget(form.www, {'attr': {'class': 'form-control'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Role użytkownika</th>
+            <td>
+            {% for r in form.roles %}
+                <div class="input-group">
+                    {{ form_widget(r) }}
+                    {{ form_label(r) }}
+                </div>
+            {% endfor %}          
+            </td>
+        </tr>
+    </table>
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Zapisz') }}</button>
+    </form>
+{{ form_end(form) }}
+</div>

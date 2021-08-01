@@ -1,0 +1,13 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Edit Users{% endblock %}
+
+{% block page_title %}Edycja użytkownika{% endblock %}
+
+{% block body %}
+    {{ include('admin/users/_form.html.twig', {'button_label': 'Modyfikuj'}) }}
+
+    <a href="{{ path('admin.users.index') }}">powrót do listy użytkowników</a>
+
+    {{ include('admin/users/_delete_form.html.twig') }}
+{% endblock %}

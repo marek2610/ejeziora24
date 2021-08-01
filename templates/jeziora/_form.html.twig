@@ -1,0 +1,104 @@
+{{ form_start(form) }}
+<form action="">
+    <fieldset class="form-group">
+
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label for="">
+                {{ form_label(form.nazwa) }}
+                </label>
+                {{ form_widget(form.nazwa, {'attr': {'class': 'form-control'}}) }}
+                <small>Nazwa jeziora</small>
+            </div>
+
+            <div class="form-group col-sm-3">
+                <label for="">
+                {{ form_label(form.miejscowosc) }}
+                </label>
+                {{ form_widget(form.miejscowosc, {'attr': {'class': 'form-control'}}) }}
+                <small>Miejscowość położenia jeziora</small>
+            </div>
+
+            <div class="form-group col-sm-3">
+                <label for="">
+                    {{ form_label(form.region) }}
+                </label>
+                {{ form_widget(form.region, {'attr': {'class': 'form-control'}}) }}
+                <small>Województwo</small>
+            </div>
+
+            <div class="form-group col-sm-3">
+                <label for="">
+                    {{ form_label(form.powierzchnia) }}
+                </label>
+                {{ form_widget(form.powierzchnia, {'attr': {'class': 'form-control'}}) }}
+                <small>Powierzchnia jeziora np. 20,50 ha</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row col sm-6">
+                <div class="form-check col-sm-4">
+                    {{ form_label(form.pomosty) }}
+                    {{ form_widget(form.pomosty) }}
+                    <small>Czy jezioro posiada pomosty?</small>
+                </div>
+
+                <div class="form-check col-sm-4">
+                    {{ form_label(form.lodz) }}
+                    {{ form_widget(form.lodz) }}
+                    <small>Czy dozwolony jest połów z łodzi?</small>
+                </div>
+
+                <div class="form-check col-sm-4">
+                    {{ form_label(form.kusza,) }}
+                    {{ form_widget(form.kusza) }}
+                    <small>Czy dozwolony jest połów kuszą?</small>
+                </div>
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label for="plik">{{ form_label(form.brochure) }}</label>
+                {% if not jeziora.brochureFilename %}
+                    <small class="form-text text-primary">Należy wybrac tylko jedno zdjęcie</small>
+                {% else %}
+                    <img style="height: auto; width: 30%; display: block;" src="{{ asset('uploads/jeziora/' ~ jeziora.brochureFilename) }}" alt="{{ jeziora.nazwa }}">
+                {% endif %}
+                {# <img style="height: 40%; display: block;" src="{{ asset('uploads/jeziora/' ~ jeziora.brochureFilename) }}" alt="{{ jeziora.nazwa }}"> #}
+                {# <img style="height: 50%; width: 50%; display: block;" src="{{ asset('uploads/jeziora/' ~ jeziora.brochureFilename) }}" alt="{{ jeziora.nazwa }}"> #}
+                {{ form_widget(form.brochure, {'attr': {'class': 'form-control-file', 'id': 'plik'}}) }}
+                {# <input type="file" class="form-control-file" id="exampleInputFile" > #}
+                <small class="form-text text-muted">Przykładowe zdjęcie obiektu przedstwiające np: panoremę, pomosty, plażę itp., itd.</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <label for="">
+                    {{ form_label(form.fish) }}
+                </label>
+                    {{ form_widget(form.fish, {'attr': {'class': 'form-control'}}) }}
+                <small>Najczęściaj występujące gatunki ryb</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <label for="">
+                    {{ form_label(form.opis) }}
+                </label>
+                {{ form_widget(form.opis, {'attr': {'class': 'form-control', 'rows': '6', 'cols': 'auto'}}) }}
+                <small>Charakterystyka jeziora: położenie, dojazd, roślinność, zarybienia i inne.</small>
+            </div>
+        </div>
+
+    {{ form_rest(form) }}
+
+    </fieldset>
+
+    <button class="btn btn-primary">{{ button_label|default('Zapisz') }}</button>
+
+</form>
+{{ form_end(form) }}
+
+

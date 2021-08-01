@@ -1,0 +1,15 @@
+fm_elfinder:
+    assets_path: /bundles/fmelfinder # default is /assets, this is where css/js elfinder files arev
+    instances:
+        default:
+            editor: ckeditor
+            theme: smoothness
+            connector:
+                roots:
+                    uploads:
+                        show_hidden: true
+                        driver: LocalFileSystem
+                        path: uploads/images
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 2M

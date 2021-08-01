@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cennik ogłoszeń{% endblock %}
+
+{% block body %}
+<div class="container">
+
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Cennik</h1>
+		<p class="primary">Cennik ogłoszeń został stworzony z myślą o każdym użytkowniku rybackim, zarówno o tym mniejszym jaki tym bardziej wymagającym.</p>
+	</div>
+
+	<div class="card-deck mb-3 text-center ">
+		<div class="card mb-4 box-shadow">
+			<div class="card-header">
+				<h4 class="my-0 font-weight-normal">Standard</h4>
+			</div>
+			<div class="card-body">
+				<h1 class="card-title pricing-card-title">100 zł
+					<small class="text-muted">/ rok</small>
+				</h1>
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>1 - 10 jezior</li>
+					<li>1 zdjęcie jeziora</li>
+					<li>Brak opłat dodatkowych</li>
+					<li>Wsparcie email</li>
+					<li>Standardowy panej administracyjny</li>
+				</ul>
+				{% if app.user %}
+					<a href="{{ url('kontakt')}}" rel="noopener noreferrer">
+				{% else %}
+					<a href="{{ url('app_register')}}" rel="noopener noreferrer">
+				{% endif %}
+					<button type="button" class="btn btn-lg btn-block btn-outline-primary">Rejestracja</button>
+				</a>
+			</div>
+		</div>
+		<div class="card mb-4 box-shadow">
+			<div class="card-header">
+				<h4 class="my-0 font-weight-normal">Premium</h4>
+			</div>
+			<div class="card-body">
+				<h1 class="card-title pricing-card-title">200 zł
+					<small class="text-muted">/ rok</small>
+				</h1>
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>11 - 25 jezior</li>
+					<li>1 zdjęcie jeziora</li>
+					<li>Brak opłat dodatkowych</li>
+					<li>Priorytetowe wsparcie email</li>
+					<li>Standardowy panej administracyjny</li>
+				</ul>
+				{% if app.user %}
+					<a href="{{ url('kontakt')}}" rel="noopener noreferrer">
+				{% else %}
+					<a href="{{ url('app_register')}}" rel="noopener noreferrer">
+				{% endif %}
+					<button type="button" class="btn btn-lg btn-block btn-primary">Zaczynaj</button>
+				</a>
+			</div>
+		</div>
+		<div class="card mb-4 box-shadow">
+			<div class="card-header">
+				<h4 class="my-0 font-weight-normal">EXCLUSIVE</h4>
+			</div>
+			<div class="card-body">
+				<h1 class="card-title pricing-card-title">1000 zł
+					<small class="text-muted">/ rok</small>
+				</h1>
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>Nieograniczona ilość jezior</li>
+					<li>4 zdjęć dla każdego jeziora</li>
+					<li>Brak opłat dodatkowych</li>
+					<li>Priorytetowe wsparcie telefoniczne</li>
+					<li>Rozbudowany panel administracyjny</li>
+				</ul>
+				<a href="{{ url('kontakt') }}" rel="noopener noreferrer">
+					<button type="button" class="btn btn-lg btn-block btn-primary">Kontakt</button>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="card text-white bg-primary mb-3">
+		<div class="card-header">
+			<h4 class="my-0 font-weight-normal text-center">REKLAMA</h4>
+		</div>
+		<div class="card-body">
+			<div class="card-text text-justify">
+				<W>Portal www.e-jeziora24.pl jest serwisem informacyjnym, dlatego też znajdziecie Państw w naszej ofercie także graficzne oraz merytoryczne formy reklamy, stanowiące skuteczne narzędzie promujące firmę. W pakiecie reklamowyn znaleźć można takie elementy jak jumbotrony, bilbordy, rectangle, banery na stronie głównej jaki podstronach, jak i wiele wiele innych, w myś zasady <cite>Sky is the limit</cite> .</p>
+				<p>W celu otrzymania oferty handlowej lub zaproponowania własnej formy reklamy - zapraszamy do kontaktu.</p>
+			</div>
+			<a href="{{ url('kontakt')}}" rel="noopener noreferrer">
+				<button type="button" class="btn btn-lg btn-success ">Kontakt</button>
+			</a>
+		</div>
+	</div>
+
+
+
+</div>
+{% endblock %}

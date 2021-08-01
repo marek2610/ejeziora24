@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista użytkowników rybackich{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Lista użytkowników rybackich</h1>
+	</div>
+</div>
+
+<div class="container">
+{# <legend>Moje ogłoszenia ({{ app.user.jeziora|length}})</legend> #}
+{# <legend>Lista użytkowników rybackich </legend> #}
+  <table class="table table-striped table-hover">
+    <tr class="table-active">
+      <th>#</th>
+      <th>
+        Użytkownik rybacki: imię / nazwisko / firma
+      </th>
+      <th>
+        Jeziora
+      </th>
+
+    </tr>
+    {% for j in licznikJezioraUzytkownicy %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>
+          <a href="{{ url('jeziora_uzytkownicy_oferta', {id: j.0.id}) }}">
+            {% if j.0.imie is empty and j.0.nazwisko is empty and j.0.nazwa is empty %}
+              --- Użytkownik nie podał danych ---
+            {% else %}
+              {{ j.0.imie }} {{ (j.0.nazwisko) }} {{ (j.0.nazwa) }}
+            {% endif %}
+					</a>
+        </td>
+        <td>
+          {{ (j.1) }}
+        </td>
+      </tr>
+    {% endfor %}
+
+    </table>  
+    <div class="navigation">
+    {# {{ knp_pagination_render(jezioraUser) }} #}
+</div>
+</div>
+{% endblock %}

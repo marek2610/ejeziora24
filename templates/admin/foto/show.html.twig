@@ -1,0 +1,44 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}{{ parent() }} Jeziora{% endblock %}
+
+{% block page_title %}
+	Dane szczegółowe dla jeziora 
+	<span class="text-primary">
+		{{ jezioro.nazwa }}
+	</span>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-7">
+			<img style="height: 100%; width: 100%; display: block;" src="{{ asset('uploads/jeziora/' ~ jezioro.brochureFilename) }}" alt="{{ jezioro.nazwa }}">
+		</div>
+		<div class="col-md-5">
+			<h1 class="text-primary">{{ jezioro.nazwa }}</h1>
+			<h3 class="text-muted">{{ jezioro.miejscowosc }}</h3>
+			<h3 class="text-secondary">woj.
+				{{ jezioro.region }}</h3>
+			<div class="text-primary">{{ jezioro.powierzchnia }}ha</div>
+			<small>dodano:
+				{{ jezioro.utworzono ? jezioro.utworzono|date('Y-m-d') : '' }}</small>
+		</div>
+	</div>
+</div>
+
+
+<nav class="navbar navbar-expand-sm">
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('admin.foto.index') }}">powrót do listy zdjęć</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('admin.foto.edit', {'slug': jezioro.slug}) }}">edytuj</a>
+		</li>
+	</ul>
+</nav>
+
+		{# {{ include('admin/jeziora/_delete_form.html.twig') }} #}
+{% endblock %}

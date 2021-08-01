@@ -1,0 +1,53 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Kategoria obiektu{% endblock %}
+
+{% block page_title %}Kategoria obiektu{% endblock %}
+
+{% block body %}
+
+{% for message in app.flashes('success') %}
+	<div class="alert alert-success">
+		<strong>Gratulacje!!!</strong>
+		{{ message }}
+	</div>
+{% endfor %}
+{% for message in app.flashes('error') %}
+	<div class="alert alert-danger">
+		<strong>Uwaga!!!</strong>
+		{{ message }}
+	</div>
+{% endfor %}
+
+<div class="table-responsive">
+	<table class="table table-striped table-sm table-hover">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Kategoria</th>
+				<th>Opis</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for jeziora_kategorium in jeziora_kategorias %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ jeziora_kategorium.kategoria }}</td>
+					<td>{{ jeziora_kategorium.opis |striptags }}</td>
+					<td>
+						<a href="{{ path('jeziora_kategoria_show', {'id': jeziora_kategorium.id}) }}">show</a>
+						<a href="{{ path('jeziora_kategoria_edit', {'id': jeziora_kategorium.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">nie zdefiniowano żadnej kategorii obiektu</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+    <a href="{{ path('jeziora_kategoria_new') }}">Nowa kategoria</a>
+{% endblock %}

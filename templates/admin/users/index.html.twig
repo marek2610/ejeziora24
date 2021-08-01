@@ -1,0 +1,65 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Users index{% endblock %}
+
+{% block page_title %}Użytkownicy{% endblock %}
+
+{% block body %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nazwisko</th>
+                        <th>Imie</th>
+                        <th>Nazwa</th>
+                        <th>Email</th>
+                        {# <th>Roles</th> #}
+                        <th>IsVerified</th>
+                        <th>Telefon</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr 
+                            {% if user.isVerified == false %}
+                            class="table-secondary">
+                            {% else %}
+                            > 
+                            {% endif %}
+                        
+                            <td>{{ loop.index }}</td>
+                            <td>{{ user.nazwisko }}</td>
+                            <td>{{ user.imie }}</td>
+                            <td>{{ user.nazwa }}</td>
+                            <td>{{ user.email }}</td>
+                            {# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
+                            <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                            <td>{{ user.telefon }}</td>
+                            <td>
+                                <a href="{{ path('admin.user.info', {'id': user.id}) }}">show</a>
+                                <a href="{{ path('admin.user.edit', {'id': user.id}) }}">edit</a>
+                                <a href="{{ path('admin.user.delete', {'id': user.id}) }}">delete</a>
+                                
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">no records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin.user.new') }}">Nowy użytkownik</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_admin') }}">Panel administracyjny</a>
+                </li>
+            </ul>
+        </nav>
+{% endblock %}

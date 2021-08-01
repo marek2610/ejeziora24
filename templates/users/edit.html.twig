@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edycja profilu
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Edycja profilu</h1>
+	</div>
+</div>
+
+<div class="container">
+	{{ form_start(form) }}
+	<form action="">
+		<table class="mt-4 table table-hover">
+			<tr>
+				<th scope="row">Adres email</th>
+				<td>{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Imię</th>
+				<td>{{ form_widget(form.imie, {'attr': {'class': 'form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Nazwisko</th>
+				<td>{{ form_widget(form.nazwisko, {'attr': {'class': 'form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Nazwa gospodarstwa</th>
+				<td>{{ form_widget(form.nazwa, {'attr': {'class': 'form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Telefon</th>
+				<td>{{ form_widget(form.telefon, {'attr': {'class': 'form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Nr konta bankowego</th>
+				<td>{{ form_widget(form.nr_konta, {'attr': {'class': 'form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th scope="row">Bank</th>
+				<td>{{ form_widget(form.bank, {'attr': {'class': 'form-control'}}) }}</td>
+			</tr>
+			<tr>
+				<th scope="row">www</th>
+				<td>{{ form_widget(form.www, {'attr': {'class': 'form-control'}}) }}</td>
+			</tr>
+		</table>
+
+		{{ form_widget(form) }}
+
+		<div class="mt-4 mb-4 text-center">
+			<button type="submit" class="btn btn-primary">Edycja profilu</button>
+		</div>
+	</form>
+	{{ form_end(form) }}
+	
+		<hr>
+
+		<a href="{{ url('user.index')}}">
+			<div class="mt-4 mb-4 text-center">
+				<button type="back" class="btn btn-primary">Powrót</button>
+			</div>
+		</a>
+
+</div>
+
+{% endblock %}

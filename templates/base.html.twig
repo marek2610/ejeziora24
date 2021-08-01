@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="{{ asset('js/cookies.js') }}"></script>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}www.e-jeziora24.pl
+			{% endblock %}
+		</title>
+		<!-- Favicon -->
+		<link rel="icon" sizes="192x192" href="{{ asset('uploads/logo/logo_ico.png') }}">
+
+		
+		<!-- Latest compiled and minified CSS -->
+		<!-- https://bootswatch.com/spacelab/ -->
+		<link rel="stylesheet" href="{{ asset('css/spacelab.min.css') }}">
+		{# <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/spacelab/bootstrap.min.css" integrity="sha384-F1AY0h4TrtJ8OCUQYOzhcFzUTxSOxuaaJ4BeagvyQL8N9mE4hrXjdDsNx249NpEc" crossorigin="anonymous"> #}
+
+		<!-- Latest BOOTSTRAP compiled and minified CSS -->
+		{# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> #}
+
+		{# <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> #}
+
+		<!-- Awsome Fonts -->
+		 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+		{% block stylesheets %}{% endblock %}
+
+		<!-- Modyfikacje CSS -->
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+	</head>
+	<body>
+			<header>
+				{{ include ("header.html.twig") }}
+			</header>
+
+			<main>
+				{% block body %}{% endblock %}
+			</main>
+
+			<footer class="pt-4 my-md-5 pt-md-5 border-top">
+				{{ include ("footer.html.twig") }}
+			</footer>
+
+
+
+		<!-- Latest compiled and minified JavaScript -->
+
+		<!-- 
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="{{ asset('js/jquery.js') }}"></script>
+		-->
+		
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+		<!--
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.mask.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}"></script>
+		-->
+
+		{# <!--
+		/// coookies
+		<script src="https://skrypt-cookies.pl/id/64080d3c74a744e2.js"></script>
+		--> #}
+
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>
+

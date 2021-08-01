@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dodawanie nowego jeziora{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Dodawanie nowego jeziora</h1>
+	</div>
+</div>
+
+<div class="container">
+
+    {{ include('jeziora/_form.html.twig') }}
+
+    <hr>
+
+    <a class="pull-left" href="{{ path('jeziora_index') }}">
+        <button class="btn btn-primary">
+            Powrót    
+        </button>
+    </a>
+
+    <div class="clearfix"></div>
+
+</div>
+{% endblock %}

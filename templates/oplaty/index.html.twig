@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Karty wędkarskie{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Wykaz opłat wędkarskich</h1>
+		<h3 class="text-primary">
+			{% if oplaty.0.user is defined %}
+				{{ oplaty.0.user.imie }}
+				{{ oplaty.0.user.nazwisko }}
+				{{ oplaty.0.user.nazwa }}
+			</h3>
+
+		{% else %}
+			brak danych użytkownika rybackiego
+		</h3>
+
+		<a href="{{ url('users.edit') }}">
+			<p class="">
+				Proszę uzupełnić profil
+			</p>
+		</a>
+	{% endif %}
+	</div>
+</div>
+
+<div class="container">
+	<table class="table table-striped table-hover">
+		<tr class="table-active">
+			<th>#</th>
+			<th>Jezioro</th>
+			<th>Rodzaj</th>
+			<th>Cena</th>
+			<th>Akcje</th>
+		</tr>
+		{% for oplata in oplaty %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ oplata.jezioro }}</td>
+				<td>{{ oplata.rodzaj }}</td>
+				<td>{{ oplata.cena }} PLN</td>
+				<td>
+					<a href="{{ path('oplaty_show', {'id': oplata.id}) }}">info</a>
+					<a href="{{ path('oplaty_edit', {'id': oplata.id}) }}">edytuj</a>
+				</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="4">brak danych</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+	<hr>
+	{% if jeziora_bez_oplat == true %}
+	<table class="table table-striped table-hover">
+		<tr class="table-active">
+			<th>#</th>
+			<th>Jezioro</th>
+			<th>Rodzaj</th>
+			<th>Cena</th>
+			<th>Info</th>
+		</tr>
+		{% for jbo in jeziora_bez_oplat %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ jbo.nazwa }}</td>
+			<td colspan="3">nie zdefiniowano opłat za połowy</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% else %}
+		<div class="alert alert-dismissible alert-primary">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Informacja!</strong>
+			Wszystkie jeziora posaidają zdefioniowane opłaty wędkarskie.
+		</div>
+	{% endif %}
+	<div class="navigation">
+		<a href="{{ path('oplaty_new') }}">
+			<button type="button" class="btn btn-primary">Nowa opłata</button>
+		</a>
+	</div>
+
+	{# <a href="{{ path('oplaty_new') }}">Nowa opłata</a> #}
+
+	{# <div class="navigation">
+		Nawigacja
+	</div> #}
+</div>
+
+{% endblock %}

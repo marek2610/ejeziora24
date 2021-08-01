@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('oplaty_delete', {'id': oplaty.id}) }}" onsubmit="return confirm('Jesteś pewny że chcesz usunąć wskazaną opłatę z bazy danych?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ oplaty.id) }}">
+    <button class="btn btn-danger">Kasuj</button>
+</form>

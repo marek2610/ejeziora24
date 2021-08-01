@@ -1,0 +1,75 @@
+AddHandler application/x-httpd-php73 php
+
+RewriteEngine On
+
+###
+#przekierować komunikację między klientem a serwerem na szyfrowany port
+###
+RewriteCond %{SERVER_PORT} ^81$ [NC]
+RewriteRule ^(.*)$ http://%{SERVER_NAME}/%{REQUEST_URI} [R=301,L]
+
+###
+# Przekierowanie na https i z www
+###
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^www.(.*) [NC]
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L,R=301]
+
+ 
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+###
+# przekierowanie domeny bez www na www 
+###
+# przekierowanie dla przykładu www -> bez www
+Options +FollowSymLinks
+RewriteCond %{HTTP_HOST} ^e-jeziora24.pl$ [NC]
+RewriteRule ^(.*)$ http://www.e-jeziora24.pl/$1 [R=301,L]
+
+###
+# adres bez index.php
+###
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+###
+# priorytety pliku startowego
+###
+Index index.php _index.html
+DirectoryIndex index.php _index.html
+
+###
+# wyłączenie listowania katalogu
+###
+Options -DirList
+Options -Indexes
+Options All -Indexes
+
+###
+# zakaz hotlinkowania
+###
+RewriteCond %{HTTP_REFERER} !^$ 
+RewriteCond %{HTTP_REFERER} !^http://(.+.)?e-jeziora24.pl [NC] 
+RewriteRule ^imgy/.*.(jpe?g|gif|bmp|png)$ - [NC,F]
+
+###
+# html jako php
+###
+RemoveHandler .html
+AddType application/x-httpd-php .html
+
+###
+# otwieranie plików pdf w domyślnym programie
+###
+AddType application/pdf .pdf
+
+###
+# do pliku index.php będzie można się odwołać, wpisując adres standardowego pliku index.html
+###
+Options FollowSymLinks
+RewriteEngine On
+RewriteRule ^index\.html$ index.php [L]

@@ -1,0 +1,88 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Edycja jeziora{% endblock %}
+
+{% block page_title %}
+    Edycja jeziora: 
+    <span class="text-primary">
+        {{ jezioro.nazwa}} 
+    </span>
+{% endblock %}
+
+{% block body %}
+    <div class="table-responsive">
+{{ form_start(form) }}
+    <form action="">
+    <table class="mt-4 table table-striped table-sm table-hove">
+        <tr>
+            <th scope="row">Aktywny</th>
+            <td>{{ form_widget(form.aktywny, {'attr': {'class': 'form-checkbox-widget'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Użytkownik</th>
+            <td>{{ form_widget(form.users, {'attr': {'class': 'form-control col-sm-4'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Nazwa jeziora</th>
+            <td>{{ form_widget(form.nazwa, {'attr': {'class': 'form-control col-sm-4'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Slug</th>
+            <td>{{ form_widget(form.slug, {'attr': {'class': 'form-control col-sm-4', 'readonly': 'true'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Powierzchnia</th>
+            <td>{{ form_widget(form.powierzchnia, {'attr': {'class': 'form-control col-sm-1'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Miejscowość</th>
+            <td>{{ form_widget(form.miejscowosc, {'attr': {'class': 'form-control col-sm-4'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Województwo</th>
+            <td>{{ form_widget(form.region, {'attr': {'class': 'form-control col-sm-4'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Pomosty</th>
+            <td>{{ form_widget(form.pomosty, {'attr': {'class': 'form-control col-sm-1'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Połów łodzią</th>
+            <td>{{ form_widget(form.lodz, {'attr': {'class': 'form-control col-sm-1'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Połów kuszą</th>
+            <td>{{ form_widget(form.kusza, {'attr': {'class': 'form-control col-sm-1'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Ryby</th>
+            <td>{{ form_widget(form.fish, {'attr': {'class': 'form-control'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Opis</th>
+            <td>{{ form_widget(form.opis) }}</td>
+        </tr>
+        {# <tr>
+            <th scope="row">Utworzono</th>
+            <td>{{ form_widget(form.utworzono, {'attr': {'class': 'form-control col-sm-2'}}) }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Modyfikacja</th>
+            <td>{{ form_widget(form.modyfikacja, {'attr': {'class': 'form-control col-sm-2'}}) }}</td>
+        </tr> #}
+        {# <tr>
+            <th scope="row">Zdjęcie</th>
+            <td>{{ form_widget(form.brochure, {'attr': {'class': 'form-control-file', 'id': 'plik'}}) }}</td>
+        </tr> #}
+    </table>
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Zapisz') }}</button>
+    </form>
+{{ form_end(form) }}
+</div>
+
+
+    <a href="{{ path('admin.jeziora.index') }}">powrót do listy jezior</a>
+
+    {# {{ include('admin/jeziora/_delete_form.html.twig') }} #}
+{% endblock %}

@@ -1,0 +1,274 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}{{ parent() }} - Panel administracyjny {% endblock %}
+
+{% block page_title %}Panel administracyjny{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            <strong>Gratulacje!!!</strong>{{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            <strong>Uwaga!!!</strong>{{ message }}
+        </div>
+    {% endfor %}
+
+{# {{ dump(foto) }} #}
+
+<div class="row flex">
+	<div class="col-4">
+		<ul class="list-group">
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<span class="col-6">Użytkownicy</span>
+				<div class="col-2">
+					<span class="badge badge-primary badge-pill">{{ users|length }}</span>
+				</div>
+				<div class="col-2">
+					<span class="badge badge-success badge-pill">{{ usersActive|length }}</span>
+				</div>
+				<div class="col-2">
+					<span class="badge badge-danger badge-pill">{{ usersNotActive|length }}</span>
+				</div>
+			</li>
+		</ul>
+        
+        {# <div class="col-">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span class="col-6">Jeziora</span>
+                    <div class="col-2">
+                        <span class="badge badge-primary badge-pill">{{ jeziora|length }}</span>
+                    </div>
+                    <div class="col-2">
+                        <span class="badge badge-success badge-pill">{{ jezioraActive|length }}</span>
+                    </div>
+                    <div class="col-2">
+                        <span class="badge badge-danger badge-pill">{{ jezioraNotActive|length }}</span>
+                    </div>
+                </li>
+                {% for j in jezioroWoj %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span class="col-6 ml-5">{{ j.0.wojewodztwo }}</span>
+                        <div class="col-4">
+                            <span class="badge badge-primary badge-pill">{{ j.1 }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div> #}
+
+
+		<br>
+
+		<ul class="list-group">
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<span class="col-6">Zdjęcia</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<span class="col-6 ml-5">systemowe</span>
+				<div class="col-4">
+					<span class="badge badge-primary badge-pill">{{ foto|length }}</span>
+				</div>
+			</li>
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<span class="col-6 ml-5">użytkownika</span>
+				<div class="col-4">
+					<span class="badge badge-primary badge-pill">{{ jezioraActive|length  -  foto|length  }}</span>
+				</div>
+			</li>
+		</ul>
+
+		<br>
+		<div class="col-">
+			<ul class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<span class="col-6">Karty wędkarskie</span>
+					<div class="col-4">
+						<span class="badge badge-primary badge-pill">14</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div class="col-">
+			<ul class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<span class="col-6">Wiadomości</span>
+					<div class="col-4">
+						<span class="badge badge-primary badge-pill">{{ jezioraWiadomosci|length }}</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-4">
+		<div class="col-">
+			<ul class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<span class="col-6">Jeziora</span>
+					<div class="col-2">
+						<span class="badge badge-primary badge-pill">{{ jeziora|length }}</span>
+					</div>
+					<div class="col-2">
+						<span class="badge badge-success badge-pill">{{ jezioraActive|length }}</span>
+					</div>
+					<div class="col-2">
+						<span class="badge badge-danger badge-pill">{{ jezioraNotActive|length }}</span>
+					</div>
+				</li>
+				{% for j in jezioroWoj %}
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						<span class="col-6 ml-5">{{ j.0.wojewodztwo }}</span>
+						<div class="col-4">
+							<span class="badge badge-primary badge-pill">{{ j.1 }}</span>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+    <div class="col-4">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="col-6">Zdjęcia</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="col-6 ml-5">systemowe</span>
+                <div class="col-4">
+                    <span class="badge badge-primary badge-pill">{{ foto|length }}</span>
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="col-6 ml-5">użytkownika</span>
+                <div class="col-4">
+                    <span class="badge badge-primary badge-pill">{{ jezioraActive|length  -  foto|length  }}</span>
+                </div>
+            </li>
+        </ul>
+        <br>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="col-6">Kategoria</span>
+            </li>
+            {% for k in kategoria %}  
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span class="col-6 ml-5">{{ k.kategoria }}</span>
+                <div class="col-4">
+                    <span class="badge badge-primary badge-pill">{{ k.kategoria|length }}</span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <br>
+
+
+    </div>
+</div>
+
+
+
+
+
+<!--
+    <h3>
+        <a href="{{ url('admin.jeziora.index') }}">Jeziora</a>
+    </h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm table-hover">
+            <tr class="table-active">
+                <th>#</th>
+                <th>Nazwa</th>
+                <th>Miejscowość</th>
+                <th>Region</th>
+                <th>Powierzchnia</th>
+                {# <th>Opis</th> #}
+                <th>Pomosty</th>
+                <th>Łódź</th>
+                <th>Kusza</th>
+                <th>Ryby</th>
+                <th>Utworzony</th>
+                {# <th>Modyfikacja</th> #}
+                <th>Aktywny</th>
+                <th>User</th>
+                <th>Akcje</th>
+            </tr>
+            {% for jezioro in jeziora %}
+            <tr
+            {% if jezioro.aktywny == false %}
+            class="table-secondary">
+            {% else %}
+            >
+            {% endif %}
+                <td>{{ jezioro.id }}</td>
+                <td>{{ jezioro.nazwa }}</td>
+                <td>{{ jezioro.miejscowosc }}</td>
+                <td>{{ jezioro.region }}</td>
+                <td>{{ jezioro.powierzchnia }}</td>
+                {# <td>{{ jezioro.opis [:10] }}</td> #}
+                <td>{{ jezioro.pomosty ? 'Tak' : 'Nie' }}</td>
+                <td>{{ jezioro.lodz ? 'Tak' : 'Nie' }}</td>
+                <td>{{ jezioro.kusza ? 'Tak' : 'Nie' }}</td>
+                <td>{{ jezioro.fish }}</td>
+                <td>{{ jezioro.utworzono ? jezioro.utworzono|date('Y-m-d') : '' }}</td>
+                {# <td>{{ jezioro.modyfikacja ? jezioro.modyfikacja|date('Y-m-d') : '' }}</td> #}
+                <td>{{ jezioro.aktywny ? 'Tak' : 'Nie' }}</td>
+                <td>{{ jezioro.users.email }}</td>
+                <td>
+                    <a href="{{ url('admin.jeziora.show', {slug: jezioro.slug})}}">info</a>
+                    <a href="{{ url('admin.jeziora.edit', {slug: jezioro.slug})}}">edit</a>
+                    <a href="{{ url('admin.jeziora.delete', {slug: jezioro.slug})}}">delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>  
+    </div> 
+
+    <h3><a href="{{ url('admin.users.index')}}">Użytkownicy</a></h3>
+    
+    <div class="table-responsive">
+        <table class="table table-striped table-sm table-hover">
+            <tr class="table-active">
+                <th>#</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Nazwa firmy</th>
+                <th>Telefon</th>
+                <th>@</th>
+                <th>Aktywny</th>
+                {# <th>Role</th> #}
+                <th>Akcje</th>
+            </tr>
+            {% for user in users %}
+                <tr {% if user.isVerified == false %} class="table-secondary">
+                {% else %}
+                    >
+                {% endif %}
+
+                <td>{{ user.id }}</td>
+                <td>{{ user.imie }}</td>
+                <td>{{ user.nazwisko }}</td>
+                <td>{{ user.nazwa }}</td>
+                <td>{{ user.telefon }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.isVerified ? 'Tak' : 'Nie'}}</td>
+                {# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
+                <td>
+                    <a href="{{ url('admin.user.info', {id: user.id})}}">info</a>
+                    <a href="{{ url('admin.user.edit', {id: user.id})}}">edit</a>
+                    <a href="{{ url('admin.user.delete', {id: user.id})}}">delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table></div>
+-->
+
+    
+
+{% endblock %}

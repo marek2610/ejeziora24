@@ -1,0 +1,17 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Edycja kategorii obiektu{% endblock %}
+
+{% block page_title %}Edycja kategorii obiektu:
+    <span class="text-primary">
+        {{ jeziora_kategorium.kategoria }}
+    </span>
+{% endblock %}
+
+{% block body %}
+    {{ include('admin/jeziora_kategoria/_form.html.twig', {'button_label': 'Edytuj'}) }}
+
+    <a href="{{ path('jeziora_kategoria_index') }}">Powrót</a>
+
+    {{ include('admin/jeziora_kategoria/_delete_form.html.twig') }}
+{% endblock %}

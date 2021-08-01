@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="row">
+		<div class="col-12 col-md">
+			<img class="mb-2" src="{{ asset('uploads/logo/logo_head.png') }}" alt="www.e-jeziora24.pl" width="40%"/>
+			<small class="d-block mb-3 text-muted">&copy;
+				{% if date("Y") == "2020" %}
+					2020
+				{% else %}
+					2020 -
+					{{ "now"|date("Y") }}
+				{% endif %}
+
+			</small>
+		</div>
+		<div class="col-6 col-md">
+			<h5>
+			Kontakt
+			</h5>
+			<ul class="list-unstyled text-small">
+				<li>
+					<a class="text-muted" href="{{ url('kontakt')}}">Zadaj pytanie</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-6 col-md">
+			<h5>Polityka i regulaminy</h5>
+			<ul class="list-unstyled text-small">
+				<li>
+					<a class="text-muted" href="#">Regulamin</a>
+				</li>
+				<li>
+					<a class="text-muted" href="#">Polityka prywatności</a>
+				</li>
+				<li>
+					<a class="text-muted" href="#">Klauzula informacyjna</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

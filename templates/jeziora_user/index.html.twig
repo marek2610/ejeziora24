@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Moje jeziora{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Zestawienie jezior użytkownika rybackiego</h1>
+      <h3 class="text-primary">
+        {% if jezioraUser.items.0 is defined %}
+          {{ jezioraUser.items.0.users.imie }}
+          {{ jezioraUser.items.0.users.nazwisko }}
+          {{ jezioraUser.items.0.users.nazwa }}
+        </h3>
+
+        {% else %}
+        brak danych użytkownika rybackiego
+      </h3>
+      <a href="{{ url('users.edit') }}">
+      <p class="">
+        Proszę uzupełnić profil
+      </p>
+      </a>
+        {% endif %}
+	</div>
+</div>
+
+<div class="container">
+	<table class="table table-striped table-hover">
+		<tr class="table-active">
+			<th>#</th>
+			<th {% if jezioraUser.isSorted('nazwa') %} class="sorted" {% endif %}>
+				{{ knp_pagination_sortable(jezioraUser, 'Nazwa', 'nazwa') }}
+			</th>
+			<th {% if jezioraUser.isSorted('aktywny') %} class="sorted" {% endif %}>
+				{{ knp_pagination_sortable(jezioraUser, 'Publikacja', 'aktywny') }}
+			</th>
+			<th>Akcje</th>
+		</tr>
+		{% for j in jezioraUser %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td>{{ j.nazwa }}</td>
+				<td>{{ j.aktywny ? 'Tak' : '' }}</td>
+				<td>
+					<a href="{{ url('jeziora_show', {slug: j.slug})}}">info</a>
+					<a href="{{ url('jeziora_edit', {slug: j.slug})}}">edytuj</a>
+				</td>
+			</tr>
+		{% endfor %}
+
+	</table>
+	<div class="navigation">
+		{{ knp_pagination_render(jezioraUser) }}
+	</div>
+
+	<div class="clearfix"></div>
+
+</div>
+
+{% endblock %}

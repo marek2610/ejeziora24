@@ -1,0 +1,113 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}{{ parent() }} Jeziora{% endblock %}
+
+{% block page_title %}
+	Dane szczegółowe dla jeziora 
+	<span class="text-primary">
+		{{ jezioro.nazwa }}
+	</span>
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<img style="height: 100%; width: 100%; display: block;" src="{{ asset('uploads/jeziora/' ~ jezioro.brochureFilename) }}" alt="{{ jezioro.nazwa }}">
+			</div>
+			<div class="col-md-5">
+				<h1 class="text-primary">{{ jezioro.nazwa }}</h1>
+				<h3 class="text-muted">{{ jezioro.miejscowosc }}</h3>
+				<h3 class="text-secondary">woj.
+					{{ jezioro.region }}</h3>
+				<div class="text-primary">{{ jezioro.powierzchnia }}ha</div>
+				<small>dodano:
+					{{ jezioro.utworzono ? jezioro.utworzono|date('Y-m-d') : '' }}</small>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container mt-4">
+	<p class="text-justify">{{ jezioro.opis |striptags }}</p>
+	<div class="row">
+		<div class="col-md-7">
+			<h3 class="text-secondary">Charakterystyka</h3>
+			<table class="table table-striped">
+				<tr>
+					<td>Pomosty</td>
+					<td>{{ jezioro.pomosty ? 'Tak' : 'Nie' }}</td>
+				</tr>
+				<tr>
+					<td>Połowy łodzią</td>
+					<td>{{ jezioro.lodz ? 'Tak' : 'Nie' }}</td>
+				</tr>
+				<tr>
+					<td>Połowy kuszą</td>
+					<td>{{ jezioro.kusza ? 'Tak' : 'Nie' }}</td>
+				</tr>
+				<tr>
+					<td>Ryby</td>
+					<td>{{ jezioro.fish }}</td>
+				</tr>
+			</table>
+			<h3 class="text-secondary">Dodatkowe informacje</h3>
+			<table class="table table-striped">
+				<tr>
+					<td>Telefon</td>
+					<td>{{ jezioro.users.telefon }}</td>
+				</tr>
+				<tr>
+					<td colspan="2">{{ jezioro.users.www ? "więcej informacji: " ~ jezioro.users.www : 'użytkownik nie podał strony www'}}</td>
+				</tr>
+			</table>
+
+		</div>
+        <div class="col-md-5">
+            <h3 class="text-secondary">Opłaty</h3>
+            <table class="table table-striped">
+                {% for oplata in jezioro.oplaty %}
+                    <tr>
+                        <td>{{ oplata.rodzaj }}</td>
+                        <td class="text-right">{{ oplata.cena | number_format(2, ',', ' ') }}
+                            PLN</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="2">Użytkownik rybacki nie zdefiniował żadnej opłaty dla tego jeziora</td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+            <h3 class="text-secondary">Dane do przelewu</h3>
+            {# {{ dump(user) }} #}
+            <table class="table table-striped">
+                <tr>
+                    <td>Nr konta</td> 
+                    <td>{{ jezioro.users.nrkonta ? jezioro.users.nrkonta : 'Brak'}}</td>
+                </tr>
+                <tr>
+                    <td>Nazwa banku</td>
+                    <td>{{ jezioro.users.bank ? jezioro.users.bank : 'Brak'}}</td>
+                </tr>
+            </table>
+        </div>
+	</div>
+</div>   
+
+<nav class="navbar navbar-expand-sm">
+	<ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('admin.jeziora.edit', {'slug': jezioro.slug}) }}">edytuj</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{{ path('admin.jeziora.index') }}">powrót do listy jezior</a>
+		</li>
+		<li class="nav-item">
+			{{ include('admin/jeziora/_delete_form.html.twig') }}
+		</li>
+	</ul>
+</nav>
+{% endblock %}

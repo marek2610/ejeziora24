@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset hasła{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+            <h1 class="text-primary">Reset hasła</h1>
+        </div>
+    </div>
+
+<div class="container col-3">
+	<form method="post" class="mt-4">
+
+
+		{% for flashError in app.flashes('reset_password_error') %}
+			<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+		{% endfor %}
+
+		{% if app.user %}
+			<div class="mb-3">
+				Jesteś zalogowany jako:
+				{{ app.user.username }},
+				<a href="{{ path('app_logout') }}">Logout</a>
+			</div>
+		{% endif %}
+
+		{{ form_start(requestForm) }}
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                </div>
+                {{ form_widget(requestForm.email, {'attr': {'class': 'form-control'}}) }}
+                <small>
+                    Enter your email address and we we will send you a link to reset your password.
+                </small>
+            </div>
+        </div>
+
+		<button class="btn btn-primary">Wyślij</button>
+		{{ form_end(requestForm) }}
+	</form>
+</div>
+
+{% endblock %}

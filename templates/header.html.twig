@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 0px;">
+
+	<!-- Logo -->
+	{# <a class="navbar-brand" href="{{ url('app_home')}}">e-jeziora24.pl</a> #}
+
+	{# <a class="navbar-brand" href="{{ url('app_home')}}">
+							<img src="{{ asset('uploads/logo/logo_nav.png') }}" alt="www.e-jeziora24.pl" width="15%"/>e-jeziora24.pl
+						</a>  #}
+
+  <a class="navbar-brand" href="{{ url('app_home')}}">
+    <img class="mr-4" src="{{ asset('uploads/logo/logo_nav.png') }}" alt="logo" style="width:40px;">e-jeziora24.pl
+  </a>
+
+
+	<!-- Links -->
+	<ul class="navbar-nav mr-auto">
+		{% if app.user %}
+			<li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'dodaj' %} active {% endif %}" href="{{ url('jeziora_new')}}">Dodaj ogłoszenie</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'moje' %} active {% endif %}" href="{{ url('jeziora_user')}}">Moje ogłoszenia</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'oplaty' %} active {% endif %}" href="{{ url('oplaty_index')}}">Karty wędkarskie</a>
+			</li>
+		{% endif %}
+			
+		<li class="nav-item">
+			<a class="nav-link {% if current_menu is defined and current_menu == 'index' %} active {% endif %}" href="{{ url('jeziora_index')}}">Ogłoszenia</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link {% if current_menu is defined and current_menu == 'lista' %} active {% endif %}" href="{{ url('jeziora_uzytkownicy') }}">Lista rybackich użytkowników</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link {% if current_menu is defined and current_menu == 'cennik' %} active {% endif %}" href="{{ url('cennik')}}">Cennik ogłoszeń</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link {% if current_menu is defined and current_menu == 'info' %} active {% endif %}" href="{{ url('info')}}">Info</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link {% if current_menu is defined and current_menu == 'kontakt' %} active {% endif %}" href="{{ url('kontakt')}}">Kontakt</a>
+		</li>
+		{# {% if app.user %}
+			<li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'profil' %} active {% endif %}" href="{{ url('user.index')}}">Profil</a>
+			</li>
+		{% endif %} #}
+	</ul>
+	<!-- ./lewy navbar -->
+
+	<!-- Prawy navbar -->
+	<ul class="navbar-nav float-right">
+		{% if app.user %}
+			<li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'profil' %} active {% endif %}" href="{{ url('user.index')}}">Profil</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{ url('app_logout')}}">Logout</a>
+			</li>
+			{% if is_granted('ROLE_ADMIN') %}
+				<li class="nav-item">
+					<a class="nav-link {% if current_menu is defined and current_menu == 'admin' %} active {% endif %}" href="{{ url('admin_admin')}}">Admin</a>
+				</li>
+			{% endif %}
+		{% else %}
+			<li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'register' %} active {% endif %}" href="{{ url('app_register')}}">Rejestracja</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'login' %} active {% endif %}" href="{{ url('app_login')}}">Login</a>
+			</li>
+		{% endif %}
+	</ul>
+	<!-- ./prawy navbar -->
+	<div class="clearfix"></div>
+</nav>

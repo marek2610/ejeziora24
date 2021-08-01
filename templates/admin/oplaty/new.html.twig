@@ -1,0 +1,20 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Dodawanie nowej opłaty{% endblock %}
+
+{% block page_title %}Dodawanie nowej opłaty{% endblock %}
+
+{% block body %}
+{{ include('admin/oplaty/_form.html.twig') }}
+
+<hr>
+
+<a class="pull-left" href="{{ path('admin.oplaty.index') }}">
+	<button class="btn btn-primary">
+		Powrót
+	</button>
+</a>
+
+<div class="clearfix"></div>
+
+{% endblock %}

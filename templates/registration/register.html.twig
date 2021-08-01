@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center text-primary">
+		<h1 class="text-primary">Rejestracja</h1>
+	</div>
+</div>
+
+<div class="container col-3">
+    <form method="post" class="mt-4">
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Jesteś zalogowany jako:
+            {{ app.user.username }},
+            <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+
+    {{ form_start(registrationForm) }}
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                </div>
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fa fa-key"></i>
+                    </span>
+                </div>
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group mb-3">
+                {{ form_widget(registrationForm.captcha, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        {{ form_row(registrationForm.agreeTerms, {
+            label: 'Akceptuję politykę serwisu'
+        }) }}
+
+        <button type="submit" class="btn btn-primary">Rejestruj</button>
+    {{ form_end(registrationForm) }}
+    </form>
+</div>
+{% endblock %}
